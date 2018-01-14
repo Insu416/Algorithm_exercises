@@ -1,3 +1,6 @@
+//x + y + z = 100
+//print all natural number values.
+
 #include <iostream>
 
 using namespace std;
