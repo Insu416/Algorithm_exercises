@@ -13,19 +13,17 @@ void clearSprialMatrix(vector< vector<int> > &spiralMatrix, int matrixSize);
 
 int main() {
 	vector< vector<int> > spiralMatrix;
-	int size = 0, matrixSize = 0;
+	int size = 0;
 
 	cin >> size;
 
 	generateTwoDimensionalVector(spiralMatrix, size);
 
-	matrixSize = spiralMatrix.size();
-	
 	generateSpiralMatrix(spiralMatrix, size);
 
-	printSpiralMatrix(spiralMatrix, matrixSize);
+	printSpiralMatrix(spiralMatrix, size);
 
-	clearSprialMatrix(spiralMatrix, matrixSize);
+	clearSprialMatrix(spiralMatrix, size);
 
 	return 0;
 }
@@ -56,17 +54,17 @@ void generateSpiralMatrix(vector< vector<int> > &spiralMatrix, int size) {
 	}
 }
 
-void printSpiralMatrix(vector< vector<int> > &spiralMatrix, int matrixSize) {
-	for (int i = 0; i < matrixSize; ++i) {
-		for (int j = 0; j < matrixSize; ++j) {
+void printSpiralMatrix(vector< vector<int> > &spiralMatrix, int size) {
+	for (int i = 0; i < size; ++i) {
+		for (int j = 0; j < size; ++j) {
 			cout << spiralMatrix[i][j] << "\t";
 		}
 		cout << endl;
 	}
 }
 
-void clearSprialMatrix(vector< vector<int> > &spiralMatrix, int matrixSize) {
-	for (int i = 0; i < matrixSize; ++i) {
+void clearSprialMatrix(vector< vector<int> > &spiralMatrix, int size) {
+	for (int i = 0; i < size; ++i) {
 		spiralMatrix[i].clear();
 	}
 	spiralMatrix.clear();
