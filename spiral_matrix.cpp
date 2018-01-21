@@ -18,11 +18,8 @@ int main() {
 	cin >> size;
 
 	generateTwoDimensionalVector(spiralMatrix, size);
-
 	generateSpiralMatrix(spiralMatrix, size);
-
 	printSpiralMatrix(spiralMatrix, size);
-
 	clearSprialMatrix(spiralMatrix, size);
 
 	return 0;
