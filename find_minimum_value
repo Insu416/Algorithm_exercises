@@ -1,0 +1,74 @@
+//find minimum value by using segment tree
+
+#include <cstdio>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+#define MAX_VALUE 1000000001
+
+int init(vector<int> &numbers, vector<int> &tree, int node, int start, int end);
+int find_min(vector<int> &tree, int node, int start, int end, int left, int right);
+
+int main() {
+	int N, M;
+	scanf("%d %d", &N, &M);
+
+	vector<int> numbers(N);
+
+	for (int i = 0; i < N; ++i) {
+		scanf("%d", &numbers[i]);
+	}
+
+	int h = (int)ceil(log2(N));
+	int tree_size = 1 << (h + 1);
+	vector<int> tree(tree_size);
+
+	init(numbers, tree, 1, 0, N - 1);
+
+	while (M--) {
+		int a, b;
+		scanf("%d %d", &a, &b);
+
+		printf("%d\n", find_min(tree, 1, 1, N, a, b));
+	}
+
+	return 0;
+}
+
+int init(vector<int> &numbers, vector<int> &tree, int node, int start, int end) {
+	if (start == end) {
+		return tree[node] = numbers[start];
+	}
+	else {
+		int left_child = init(numbers, tree, node * 2, start, (start + end) / 2);
+		int right_child = init(numbers, tree, node * 2 + 1, (start + end) / 2 + 1, end);
+		
+		if (left_child < right_child) {
+			return tree[node] = left_child;
+		}
+		else {
+			return tree[node] = right_child;
+		}
+	}
+}
+
+int find_min(vector<int> &tree, int node, int start, int end, int left, int right) {
+	if ((right < start) || (end < left)) {
+		return MAX_VALUE;
+	}
+	else if ((left <= start) && (end <= right)) {
+		return tree[node];
+	}
+	else {
+		int left_child = find_min(tree, node * 2, start, (start + end) / 2, left, right);
+		int right_child = find_min(tree, node * 2 + 1, (start + end) / 2 + 1, end, left, right);
+		
+		if (left_child < right_child) {
+			return left_child;
+		}
+		else {
+			return right_child;
+		}
+	}
+}
